@@ -1,0 +1,22 @@
+prob statement
+Given an array, find maximum sum of smallest and second smallest elements chosen from all possible sub-arrays. 
+More formally, if we write all (nC2) sub-arrays of array of size >=2 and find the sum of smallest and second smallest, then our answer will be maximum sum among them.
+ 
+ imp points
+ Indirectly this question is same as the max sum of consecutive numbers because the two numbers will always
+ be the smallest and second smallest for the subarray of two elements
+ 
+   long long pairWithMaxSum(long long arr[], long long n)
+    {
+          long long maxi=0;
+          long long sum=0;
+          for(int i=0;i<n-1;i++)
+          {
+              sum=arr[i]+arr[i+1];
+               maxi=max(maxi,sum);
+          }
+         return maxi;
+    }
+    
+    t(c)=o(n)
+    s(c)=o(1)
