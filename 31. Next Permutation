@@ -1,0 +1,30 @@
+ist apporch using next_permutation(nums.begin(),nums.end()) // using fun
+
+2nd optimal apporch using algo
+start treverse from back and find the element a[i]<a[i+1] store the index at index1
+again traverse from back and find the index whose greater index1 and store in inndex2
+after this swap(a[inex1],a[index2])
+and after that reverse(index1+1,->last)
+
+ void nextPermutation(vector<int>& nums) {
+        int n=nums.size(),i,j;
+        for(i=n-2;i>=0;i--)
+        {
+            if(nums[i]<nums[i+1])
+                break;
+        }
+        if(i<0) reverse(nums.begin(),nums.end());//because we start from n-2 if size=1
+        else
+        {
+            for(j=n-1;j>=0;j--)
+            {
+                if(nums[j]>nums[i])
+                    break;
+            }
+            swap(nums[i],nums[j]);
+            reverse(nums.begin()+i+1,nums.end());
+        }
+    }
+    t(c)=o(n)+o(n)+o(n)=o(n)
+    s(c)=o(1)
+
