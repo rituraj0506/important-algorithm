@@ -1,0 +1,38 @@
+ist apporch using unordered_map 
+t(c)=O(n) s(c)=o(n)
+
+    int majorityElement(vector<int>& nums) {
+     int n=nums.size();
+       unordered_map<int,int>m;
+        for(int i=0;i<n;i++)
+        {
+            m[nums[i]]++;
+        }
+        for(auto it:m)
+        {
+            if(it.second>n/2)
+                return it.first;
+        }
+        return 0;
+    }
+    2nd approch is  moore voting algorithm it takes element as 0 and count as 0 linearly  iterate first ele to last ele
+    at first it check count =0 then store ele  after iterating ele store in ele is majority element
+    t(c)=o(n) s(c)=o(1)
+     int majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        int c=0,ele=0;
+      for(int i=0;i<n;i++)
+      {
+        if(c==0)
+           ele=nums[i];
+        if(ele==nums[i])
+              c++;
+         else
+              c--;
+      }
+        return ele;
+    }
+    
+    
+    
+    
