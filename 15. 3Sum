@@ -1,0 +1,58 @@
+// brute force t(c) =o(n^3)+(nlogn)
+
+vector<vector<int>> threeSum(vector<int>& nums) {
+        set<vector<int>>s;
+        int n=nums.size();
+        if(n==0||n<3) return { }; // atleast three in triplet
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<n-2;i++)
+        {
+         for(int j=i+1;j<n-1;j++)
+         {
+             for(int k=j+1;k<n;k++)
+             {
+                if(nums[i]+nums[j]+nums[k]==0)
+                    s.insert({nums[i],nums[j],nums[k]});
+             }
+         }
+        }
+           vector<vector<int>>ans(s.begin(),s.end());
+        return ans;
+    }
+    
+    
+    t(c)=o(n^2)
+    s(c)=o(1)
+    vector<vector<int>> threeSum(vector<int>& nums) {
+     vector<vector<int>>ans;
+      int n=nums.size();
+   
+     sort(nums.begin(),nums.end());
+        int sum=0; // a+b+c=0 b+c=-a  a is constant
+        for(int i=0;i<n-2;i++)
+        {
+            if(i==0 ||(i>0 && nums[i]!=nums[i-1]))
+            {
+                int l=i+1,h=n-1,sum=0-nums[i]; // b+c=-a
+                while(l<h)
+                {
+                    if(nums[l]+nums[h]==sum)
+                    {
+                       vector<int>res; // imp to declare here
+                        res.push_back(nums[i]);
+                        res.push_back(nums[l]);
+                        res.push_back(nums[h]);
+                        ans.push_back(res);
+                        while(l<h&&nums[l]==nums[l+1]) l++;
+                         while(l<h&&nums[h]==nums[h-1]) h--;
+                        l++,h--;
+                    }
+                    else if(nums[l]+nums[h]<sum)
+                        l++;
+                    else
+                        h--;
+                }
+            }
+        }
+        return ans;
+    }
