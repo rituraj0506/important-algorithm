@@ -1,0 +1,39 @@
+You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
+Return the single element that appears only once.
+Your solution must run in O(log n) time and O(1) space.
+
+1: using map take o(n) both t and s
+
+2: using binary search
+first check for boundary ele if it is unique not equal to just next ele
+pair inde check [1,1,2,2,3,4,4] in this case boundary ele is not unique ele it exist in pair and they will always start with even index and end with odd index
+after unique ele 3 it was always start with odd index using this you take a decision which part you search for uique ele 
+after that if you hit unique ele it will not equal to prev ele and not equal to next ele
+
+partition property let us say you are pointing index 3, now you have val 2 at index 2 and 3 pair property it will guarntee unique ele not in left side 
+at index 5 it is odd it can be even so uniq ele before it
+
+// observation after unique ele odd index 
+ int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int l=0,h=n-1;
+        if(h==0) // if one ele in this case
+          return nums[0];
+       else if(nums[0]!=nums[1]) // if first ele is unqiue
+            return  nums[0];
+        else if(nums[h]!=nums[h-1]) // if last eleis unique
+            return nums[h];
+           
+        while(l<=h)
+        {
+            int mid=l+(h-l)/2;
+            if(nums[mid]!=nums[mid-1]&&nums[mid]!=nums[mid+1])
+                return nums[mid];
+          // if partition is odd or even index where we go
+            if((mid%2==1 && nums[mid]==nums[mid-1])||(mid%2==0 && nums[mid]==nums[mid+1]))
+                l=mid+1;
+            else
+                h=mid-1;
+        }
+        return -1;
+    }
