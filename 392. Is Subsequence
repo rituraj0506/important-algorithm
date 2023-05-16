@@ -1,0 +1,48 @@
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters 
+without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+ 
+
+Example 1:
+Input: s = "abc", t = "ahbgdc"
+Output: true
+
+// dp approach
+
+ // same as lcs
+    int f(int i,int j,string &s,string &t,vector<vector<int>>&dp)
+    {
+        if(i<0||j<0) return 0;
+       if(dp[i][j]!=-1) return dp[i][j];
+        if(s[i]==t[j])
+            return dp[i][j]=1+f(i-1,j-1,s,t,dp);
+        else
+             return dp[i][j]=0+max(f(i-1,j,s,t,dp),f(i,j-1,s,t,dp));
+        
+    }
+    bool isSubsequence(string s, string t) {
+        int n=s.size();
+        int n1=t.size();
+        if(n>n1) return false;
+        vector<vector<int>>dp(n,vector<int>(n1,-1));
+       if(f(n-1,n1-1,s,t,dp)==n) return true;
+        else
+            return false;
+    }
+    
+    // brute force o(n)
+        bool isSubsequence(string s, string t) {
+        int l=s.length();
+        int r=t.length();
+        int i=0,j=0;
+        while(i!=l&&j!=r)
+        {
+            if(s[i]==t[j])
+            {
+                i++;
+            }
+            j++;
+        }
+        return i==l?true:false;
+    }
